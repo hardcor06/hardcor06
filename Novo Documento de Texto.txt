@@ -1,0 +1,52 @@
+..Abaixo estará Lib da nossa Ui
+
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/7yhx/kwargs_Ui_Library/main/source.lua"))()
+
+local UI = Lib:Create{
+    Theme = "Dark", -- or any other theme
+    Size = UDim2.new(0, 555, 0, 400) -- default
+ }
+ 
+ local Main = UI:Tab{
+    Name = "Inicio"
+ }
+ 
+ local Divider = Main:Divider{
+    Name = "Inicio shit"
+ }
+ 
+ local QuitDivider = Main:Divider{
+    Name = "Sair"
+
+
+-- Script para abater NPCs em Blox Fruits
+
+-- Identificador do NPC (substitua pelo ID do NPC específico que você deseja abater)
+local npcId = "ID_DO_NPC_AQUI"
+
+-- Função para encontrar e atacar o NPC
+local function attackNPC()
+    local npc = game.Workspace:FindFirstChild(npcId)
+    if npc then
+        -- Verifica se o NPC está vivo antes de atacar
+        if npc:FindFirstChild("Humanoid") and npc.Humanoid.Health > 0 then
+            -- Se o NPC estiver dentro do alcance, ataque-o
+            if (npc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 10 then
+                game.Players.LocalPlayer.Character:MoveTo(npc.Position)
+                wait(1) -- Aguarde um momento para chegar ao NPC
+                -- Ataque o NPC (substitua este código com a lógica de ataque específica do jogo)
+                -- Por exemplo, você pode usar uma arma ou habilidade de combate do jogo
+                -- game.Players.LocalPlayer.Character:FindFirstChild("SuaArma"):Activate()
+            else
+                -- Se o NPC estiver fora do alcance, mova-se em direção a ele
+                game.Players.LocalPlayer.Character:MoveTo(npc.Position)
+            end
+        end
+    end
+end
+
+-- Loop de ataque contínuo
+while true do
+    attackNPC()
+    wait(3) -- Espere alguns segundos antes de tentar atacar novamente
+end
